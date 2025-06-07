@@ -2,8 +2,8 @@ package com.example.templateapp.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.templateapp.data.repository.ExampleRepository
 import com.example.templateapp.model.ExampleItem
-import com.example.templateapp.domain.repository.ExampleRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow

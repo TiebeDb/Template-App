@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 
 @Composable
-fun ExampleScreen(viewModel: ExampleViewModel = hiltViewModel()) {
+fun ExampleScreen(modifier: Modifier, viewModel: ExampleViewModel = hiltViewModel()) {
     val items = viewModel.items.collectAsState()
 
     LaunchedEffect(Unit) { viewModel.loadItems() }
