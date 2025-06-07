@@ -14,6 +14,7 @@ import com.example.templateapp.presentation.ExampleScreen
 import com.example.templateapp.ui.theme.TemplateAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
+// Allows Hilt to inject fields into this Activity and the Composables it hosts.
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

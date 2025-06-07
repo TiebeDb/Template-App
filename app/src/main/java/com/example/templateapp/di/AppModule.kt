@@ -29,11 +29,13 @@ import retrofit2.Retrofit
 import java.time.LocalDate
 import javax.inject.Singleton
 
+// Hilt module that supplies app wide dependencies.
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
     private val BASE_URL = "http://10.0.2.2:3000/"
 
+    // Configure JSON parsing that ignores unknown fields.
     @Provides @Singleton
     fun provideJson(): Json = Json {
         ignoreUnknownKeys = true
@@ -47,6 +49,7 @@ object AppModule {
     }
 
     /*
+    // Uncomment this section when you have a backend to talk to.
     @Provides
     @Singleton
     fun provideRetrofit(json: Json): Retrofit = Retrofit.Builder()
@@ -67,6 +70,8 @@ object AppModule {
     }
     */
 
+    // ExampleRepository used throughout the app. Swap the implementation here
+    // when you need to fetch data from a different source.
     @Provides
     @Singleton
     fun provideRepository (): ExampleRepository {
@@ -74,6 +79,7 @@ object AppModule {
     }
 
 
+    // DataStore instance used for persistent user settings.
     @Provides
     @Singleton
     fun providePreferencesDataStore(
@@ -89,6 +95,7 @@ object AppModule {
         produceFile = { context.preferencesDataStoreFile("user_preferences") }
     )
 
+    // Repository that exposes typed accessors for DataStore values.
     @Provides
     @Singleton
     fun provideUserPreferenceRepository(
