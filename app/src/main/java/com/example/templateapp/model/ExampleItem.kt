@@ -1,6 +1,9 @@
 package com.example.templateapp.model
 
+import kotlinx.serialization.Serializable
+
 // Simple model used in the example screens.
+@Serializable // to be able to convert this into json item or the other way around
 data class ExampleItem(
     val name: String,
     // Extra info to display on the screens
