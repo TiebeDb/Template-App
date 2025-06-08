@@ -19,10 +19,38 @@ class ExampleViewModel @Inject constructor(
     private val _items = MutableStateFlow<List<ExampleItem>>(emptyList())
     val items: StateFlow<List<ExampleItem>> = _items
 
+    // Index of the currently selected item for the detail screen
+    private val _currentIndex = MutableStateFlow(0)
+    val currentIndex: StateFlow<Int> = _currentIndex
+
     // Fetch items asynchronously using the ViewModel's coroutine scope.
     fun loadItems() {
         viewModelScope.launch {
             _items.value = repository.getItems()
         }
+    }
+
+    // Retrieve the item at the current index if available
+    fun currentItem(): ExampleItem? = _items.value.getOrNull(_currentIndex.value)
+
+    // Update the current index to show the next item
+    fun nextItem() {
+        val next = (_currentIndex.value + 1).coerceAtMost(_items.value.lastIndex)
+        _currentIndex.value = next
+    }
+
+    // Update the current index to show the previous item
+    fun previousItem() {
+        val prev = (_currentIndex.value - 1).coerceAtLeast(0)
+        _currentIndex.value = prev
+    }
+
+    fun setIndex(index: Int) {
+        _currentIndex.value = index.coerceIn(0, _items.value.lastIndex)
+    }
+
+    // Add an item to the list (in-memory for this example)
+    fun addItem(item: ExampleItem) {
+        _items.value = _items.value + item
     }
 }
